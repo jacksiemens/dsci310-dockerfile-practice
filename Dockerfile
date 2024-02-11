@@ -1,7 +1,9 @@
 FROM quay.io/jupyter/r-notebook:2023-11-19
 
-# Install R packages using conda from the conda-forge channel
+# Install rvest package using conda
 RUN conda install --quiet --yes -c conda-forge \
-    dplyr=1.0.7 \  # Example version, replace with the version you need
-    ggplot2=3.3.5 \  # Example version, replace with the version you need
+    r-rvest=1.0.3 \
     && conda clean --all -f -y
+
+# Install baseballr package from CRAN
+RUN R -e "install.packages('baseballr', version='1.6.0', repos='http://cran.rstudio.com/')"
